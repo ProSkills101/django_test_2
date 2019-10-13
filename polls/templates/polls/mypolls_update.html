@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block js %}
+<script src="{% static 'polls/js/mypolls-update.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+  <h2>Update Poll</h2>
+  <div class="card mb-2">
+    <div class="card-body">
+      <form id="poll-form" method="post" action="{% url 'polls:mypolls-update' question_id=question.id  %}">
+        <div class="form-group">
+          <label for="question-text">Question Text</label>
+          <input type="text" class="form-control" id="question-text" name="question-text" placeholder="Enter question text" value="{{ question.question_text }}">
+        </div>
+        <h5>Choices</h5>
+        {% for choice in choices %}
+        <div class="form-group">
+          {% csrf_token %}
+          <button type="button" class="close pull-right delete-choice-btn" aria-label="Close"  data-qid="{{question.id}}"  data-qcid="{{choice.id}}">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <label for="choice-text-{{ choice.id }}">Choice Text</label>
+          <input type="text" class="form-control" id="choice-text-{{ choice.id }}" name="choice-text-{{ choice.id }}" placeholder="Enter choice text" value="{{ choice.choice_text }}">
+        </div>
+        {% endfor %}
+        <div class="form-group">
+          <label for="choice-new">Choice Text New</label>
+          <input type="text" class="form-control" id="choice-new" name="choice-new" placeholder="Enter choice text">
+        </div>
+        {% csrf_token %}
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}
