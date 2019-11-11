@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class = "container mt-5">
+    <div class="row">
+        <div class = "col-md-3">
+            <div><img src = "{{ user.avatar }}" class="img-fluid"/></div>
+        </div>
+            <div class = "col-md-9">
+            <div>username: {{ user.username }}</div>
+            <div>email: {{ user.email }}</div>
+            <div>nickname: {{ user.nickname }}</div>
+            <div>info: {{ user.info }}</div>
+        </div>
+    </div>
+    
+</div>
+{% endblock %}

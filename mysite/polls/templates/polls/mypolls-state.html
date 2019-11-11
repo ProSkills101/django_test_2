@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block style %}
+<link href="{% static 'css/style.css' %}" rel="stylesheet">
+{% endblock style %}
+
+{% block js %}
+<script src="{% static 'js/mypolls-update.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+  <h2>Update Poll</h2>
+  <div class="card mb-2">
+    <div class="card-body">
+      <form method="post">{% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Update">
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

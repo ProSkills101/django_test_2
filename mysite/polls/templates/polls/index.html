@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+  <h2>Polls</h2>
+  {% if latest_question_list %}
+  <div class="row text-light no-gutters bg-secondary">
+    <div class="col">
+      <h5 class="ml-2 my-1">Title</h5>
+    </div>
+    <div class="col">
+      <h5 class="ml-2 my-1">Pub Date</h5>
+    </div>
+    <div class="col">
+      <h5 class="ml-2 my-1">Host</h5>
+    </div>
+    <div class="col">
+      <h5 class="ml-2 my-1">Actions</h5>
+    </div>
+  </div>
+  {% for question in latest_question_list %}
+  <div class="row no-gutters border-bottom">
+    <div class="col p-1">
+      <a href="{% url 'polls:result' question.id %}">{{ question.question_text }}</a>
+    </div>
+    <div class="col p-1">
+      {{ question.created }}
+    </div>
+    <div class="col p-1">
+      <img class="rounded-circle" src="/static/media/{{ question.user.avatar }}" style="width: 30px; height: 30px;" />
+      {{ question.user.nickname }}
+    </div>
+    <div class="col p-1">
+      {% if user.is_authenticated %}
+      <a href="{% url 'polls:detail' question.id %}" class="btn btn-primary btn-sm">Vote</a>
+      {% endif %}
+      <a href="{% url 'polls:result' question.id %}" class="btn btn-success btn-sm">Result</a>
+    </div>
+  </div>
+  {% endfor %}
+  {% else %}
+    <p>No polls are available.</p>
+  {% endif %}
+</div>
+{% endblock %}
