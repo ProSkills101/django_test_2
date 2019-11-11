@@ -5,7 +5,9 @@
   <head>
     <title>Base Template</title>
     <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'css/fontawesome/css/all.min.css' %}" />
     <link rel="stylesheet" type="text/css" href="{% static 'css/site.css' %}" />
+    {% block css %}{% endblock %}
     <script src="{% static 'js/jquery-3.4.1.js' %}"></script>
     <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
     {% block js %}{% endblock %}
@@ -26,6 +28,12 @@
                 <a class="nav-link" href="/polls">Polls</a>
               </li>
               <li class="nav-item">
+                <a class="nav-link" href="/blogs">Blogs</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/forums">Forums</a>
+              </li>
+              <li class="nav-item">
                 <a class="nav-link disabled" href="#">Disabled</a>
               </li>
             </ul>
@@ -44,6 +52,9 @@
                         <a class="dropdown-item" href="/accounts/user_settings">Settings</a>
                         <a class="dropdown-item" href="/accounts/profile/{{user.username}}">Profile</a>
                         <a class="dropdown-item" href="{% url 'polls:mypolls' %}">My polls</a>
+                        <a class="dropdown-item" href="{% url 'blogs:myblogs' %}">My blogs</a>
+                        <a class="dropdown-item" href="{% url 'blogs:myblogs' %}">My forums</a>
+                        <a class="dropdown-item" href="{% url 'files:index' %}">My files</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
                     </div>

@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block js %}
+<script src="{% static 'blogs/js/myblogs.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+<div class="container mt-2">
+  <div class="d-flex align-items-center">
+    <h2>My Blogs</h2>
+    <div class="ml-auto">
+      <a href="{% url 'blogs:myblogs-create' %}" class="btn btn-primary blog-attach">Create</a>
+    </div>
+  </div>
+  <div id="blog-table">
+    <div class="row text-light no-gutters bg-secondary">
+      <div class="col">
+        <h5 class="ml-2 my-1">Title</h5>
+      </div>
+      <div class="col">
+        <h5 class="ml-2 my-1">Created</h5>
+      </div>
+      <div class="col">
+        <h5 class="ml-2 my-1">Updated</h5>
+      </div>
+      <div class="col">
+        <h5 class="ml-2 my-1">Author</h5>
+      </div>
+      <div class="col">
+        <h5 class="ml-2 my-1">Actions</h5>
+      </div>
+    </div>
+    {% for blog in blogs %}
+    <div class="row no-gutters border-bottom">
+      <div class="col p-1">
+        <a href="{% url 'blogs:myblog' blog.id %}">{{ blog.title }}</a>
+      </div>
+      <div class="col p-1">
+        {{ blog.created }}
+      </div>
+      <div class="col p-1">
+        {{ blog.updated }}
+      </div>
+      <div class="col p-1">
+        <img class="rounded-circle" src="/static/media/{{ blog.user.avatar }}" style="width: 30px; height: 30px;" />
+        {{ blog.user.nickname }}
+      </div>
+      <div class="col p-1">
+        <a href="{% url 'blogs:myblog' blog.id %}" class="btn btn-info">Update</a>
+        <a href="#" class="delete-btn btn btn-danger" data-blogid="{{blog.id}}">Delete</a>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}
