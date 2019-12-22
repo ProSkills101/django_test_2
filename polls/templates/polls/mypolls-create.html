@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+<div class="container">
+  <h2>Create Poll</h2>
+  <div class="card mb-2">
+    <div class="card-body">
+      <form id="poll-form" method="post" action="{% url 'polls:mypolls-create' %}">
+        <div class="form-group">
+          <label for="question-text">Question Text</label>
+          <input type="text" class="form-control" id="question-text" name="question-text" placeholder="Enter question text">
+        </div>
+        {% csrf_token %}
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

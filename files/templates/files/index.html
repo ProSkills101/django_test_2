@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block css %}
+<link rel="stylesheet" type="text/css" href="{% static 'js/bootstrap-fileinput/css/fileinput.min.css' %}" />
+{% endblock %}
+
+{% block js %}
+<script src="{% static 'js/bootstrap-fileinput/js/fileinput.min.js' %}"></script>
+<script src="{% static 'js/bootstrap-fileinput/themes/fa/theme.min.js' %}"></script>
+<script src="{% static 'files/js/main.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+<div class="container mt-3">
+  <div class="d-flex">
+    <h2>Files</h2>
+    <div class="ml-auto">
+      <a href="#" class="btn btn-primary" id="btnUpload">Upload</a>
+    </div>
+  </div>
+  <div id="uploadCard" class="card mb-3 d-none">
+    <div class="card-header">
+      Upload files
+    </div>
+    <div class="card-body">
+      <form method="post" enctype="multipart/form-data">
+        <div class="form-group">
+          <input type="file" multiple class="custom-file-input" id="userFile" name="file">
+        </div>
+        <div class="form-group">
+          <label for="inputDesc">Description</label>
+          <input type="text" class="form-control" id="inputDesc" aria-describedby="descHelp" placeholder="Enter desc" name="desc">
+        </div>
+        <div class="form-group">
+          <label for="inputTag">Tag</label>
+          <input type="text" class="form-control" id="inputTag" aria-describedby="tagHelp" placeholder="Enter tag" name="tag">
+        </div>
+        {% csrf_token %}
+        <!--div class="form-group">
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </div-->
+      </form>
+    </div>
+  </div>
+  {% if form.errors %}
+    {% for field in form %}
+      {% for error in field.errors %}
+      <div class="alert alert-danger">
+          <strong>{{ error|escape }}</strong>
+      </div>
+      {% endfor %}
+    {% endfor %}
+    {% for error in form.non_field_errors %}
+    <div class="alert alert-danger">
+        <strong>{{ error|escape }}</strong>
+    </div>
+    {% endfor %}
+  {% endif %}
+
+  <div class="row">
+    {% for file in files %}
+    <div class="col-sm-6 col-md-4 col-xl-3 mb-2">
+      <div class="card" id="{{file.id}}">
+        <div class="dropdown position-absolute" style="right: 0; top: 0;">
+          <button class="btn btn-sm" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+           <i class="fas fa-ellipsis-v"></i>
+          </button>
+          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+            <a class="dropdown-item edit-btn" data-id="{{file.id}}" data-desc="{{file.desc}}" data-tag="{{file.tag}}" href="#">Edit</a>
+            <a class="dropdown-item delete-btn" data-id="{{file.id}}"" href="#">Delete</a>
+          </div>
+        </div>
+        <div class="card-body">
+          <div style="height: 150px;">
+            <img src="/static/media/{{file.file}}" class="img-fluid" alt="{{file.name}}" style="max-height: 100%;">
+          </div>
+        </div>
+        <div class="card-body">
+          <p class="text-truncate">{{ file.name }}</p>
+          <p class="text-truncate">{{ file.created }}</p>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

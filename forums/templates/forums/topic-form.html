@@ -1,0 +1,19 @@
+<form class="topic-form" data-forumid="{{forum.id}}" data-topicid="{{topic.id}}">
+    <div class="form-group">
+      <label for="title">Title</label>
+      <input type="text" class="form-control" name="title" placeholder="Enter title" value="{{topic.title}}">
+      <div class="invalid-feedback">
+        Title is required.
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="html">Html</label>
+      <textarea class="form-control" name="html" rows="10">{{topic.html}}</textarea>
+      <div class="invalid-feedback">
+        Html is required.
+      </div>
+    </div>
+    
+    {% csrf_token %}
+    <button type="submit" class="btn btn-primary submit">Submit</button>
+  </form>

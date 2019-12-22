@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block js %}
+<script src="{% static 'js/ckeditor4/ckeditor.js' %}"></script>
+<script src="{% static 'forums/js/forum.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+  <div class="d-flex align-items-center">
+    <h2>Forum - {{forum.title}}</h2>
+    <div class="ml-auto">
+      <a href="#" class="btn btn-primary topic-attach">Create Topic</a>
+    </div>
+  </div>
+  <div class="card topic-form-card d-none">
+    <div class="card-body">
+      {% include 'forums/topic-form.html' %}
+    </div>
+  </div>
+
+  <div class="row text-light no-gutters bg-secondary">  
+    <div class="col">
+      <h5 class="ml-2 my-1">Title</h5>
+    </div>
+    <div class="col">
+      <h5 class="ml-2 my-1">Host</h5>
+    </div>
+    <div class="col">
+      <h5 class="ml-2 my-1">Created</h5>
+    </div>
+    <div class="col">
+      <h5 class="ml-2 my-1">Updated</h5>
+    </div>
+  </div>
+  {% for topic in topics %}
+  <div class="row no-gutters border">  
+    <div class="col">
+      <a href="{% url 'forums:topic' forum.id topic.id %}">
+        <h6>{{topic.title}}</h6>
+      </a>
+    </div>
+    <div class="col">
+      <img class="rounded-circle" src="/static/media/{{ topic.user.avatar }}" style="width: 30px; height: 30px;" />
+      {{ topic.user.nickname }}
+    </div>
+    <div class="col">
+      <span>{{topic.created}}</span>
+    </div>
+    <div class="col">
+      <span>{{topic.updated}}</span>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+{% endblock %}

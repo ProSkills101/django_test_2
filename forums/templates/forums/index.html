@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+  <h2>Forums</h2>
+  <div class="row text-light no-gutters bg-secondary">  
+    <div class="col">
+      <h5 class="ml-2 my-1">Title</h5>
+    </div>
+    <div class="col">
+      <h5 class="ml-2 my-1">Host</h5>
+    </div>
+    <div class="col">
+      <h5 class="ml-2 my-1">Created</h5>
+    </div>
+    <div class="col">
+      <h5 class="ml-2 my-1">Updated</h5>
+    </div>
+  </div>
+  {% for forum in forums %}
+  <div class="row no-gutters border">  
+    <div class="col">
+      <a href="{% url 'forums:forum' forum.id %}">
+        <h6>{{forum.title}}</h6>
+      </a>
+    </div>
+    <div class="col">
+      <img class="rounded-circle" src="/static/media/{{ forum.user.avatar }}" style="width: 30px; height: 30px;" />
+      {{ forum.user.nickname }}
+    </div>
+    <div class="col">
+      <span>{{forum.created}}</span>
+    </div>
+    <div class="col">
+      <span>{{forum.updated}}</span>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+{% endblock %}

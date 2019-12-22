@@ -1,0 +1,12 @@
+<form class="post-form" data-forumid="{{forum.id}}" data-topicid="{{topic.id}}" data-postid="{{post.id}}">
+    <div class="form-group">
+      <label for="html">Html</label>
+      <textarea class="form-control" name="html" rows="10">{{post.html}}</textarea>
+      <div class="invalid-feedback">
+        Html is required.
+      </div>
+    </div>
+    
+    {% csrf_token %}
+    <button type="submit" class="btn btn-primary submit">Submit</button>
+  </form>

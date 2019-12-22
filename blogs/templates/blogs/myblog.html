@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block js %}
+<script src="{% static 'js/ckeditor4/ckeditor.js' %}"></script>
+<script src="{% static 'blogs/js/myblog.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+<div class="container mt-2">
+  <div class="blog-view">
+    <div class="row">
+      <div class="col">
+        <div class="d-flex align-items-center mb-2">
+          <h2>{{blog.title}}</h2>
+          <a href="#" id="btnUpdate" class="ml-auto btn btn-info">Update</a>
+        </div>
+        
+        {% if blog.cover %}
+        <img src="{{blog.cover}}" class="img-fluid mb-2" />
+        {% endif %}
+    
+        {{blog.html|safe}}
+      </div>
+    </div>
+  </div>
+  <div class="blog-edit d-none">
+    <div class="row">
+      <div class="col-md-8">
+        <div class="d-flex align-items-center">
+          <h2>Edit Blog</h2>
+          <a href="#" id="btnCancel" class="ml-auto btn btn-info">Cancel</a>
+        </div>
+        {% include 'blogs/blog-form.html' %}
+      </div>
+      <div class="col-md-4">
+        {% for file in files %}
+        <img src="/static/media/{{file.file}}" class="img-fluid" alt="{{file.name}}">
+        {% endfor %}
+      </div>
+    </div>
+    
+  </div>
+</div>
+{% endblock %}
