@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block css %}
+<style>
+  body {
+      overflow-y: scroll;
+  }
+</style>
+{% endblock %}
+
+{% block js %}
+<script src="{% static 'js/ckeditor4/ckeditor.js' %}"></script>
+<script src="{% static 'forums/js/topic.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+  <div class="d-flex align-items-center">
+    <h2>Topic - {{topic.title}}</h2>
+    <div class="ml-auto">
+      <a href="#" class="btn btn-primary forum-topic-btn" data-topicid="{{topic.id}}">Update Topic</a>
+    </div>
+  </div>
+  <div class="card {% if topic %}topic-form-card-{{topic.id}}{% else %}topic-form-card{% endif %} d-none">
+    <div class="card-body">
+      {% include 'forums/topic-form.html' %}
+    </div>
+  </div>
+  <div class="row no-gutters">  
+    <div class="col-12">{{topic.html|safe}}</div>
+  </div>
+
+  <div class="d-flex align-items-center">
+    <h2>Posts</h2>
+    <div class="ml-auto">
+      <a href="#" class="btn btn-primary forum-post-btn" data-topicid="{{post.id}}">Create Post</a>
+    </div>
+  </div>
+  <div class="card {% if post %}post-form-card-{{post.id}}{% else %}post-form-card{% endif %} d-none">
+    <div class="card-body">
+      {% include 'forums/post-form.html' %}
+    </div>
+  </div>
+  <hr>
+
+  {% for post in posts %}
+  <div class="row no-gutters border">  
+    <div class="col-12">
+      {{post.html|safe}}
+    </div>
+    <div class="col-12">
+      <div>
+        <a href="#" class="btn btn-primary forum-post-btn" data-postid="{{post.id}}">Update Post</a>
+      </div>
+      <div class="card {% if post %}post-form-card-{{post.id}}{% else %}post-form-card{% endif %} d-none">
+        <div class="card-body">
+          {% include 'forums/post-form.html' %}
+        </div>
+      </div>
+    </div>
+  </div>
+  <hr>
+  {% endfor %}
+</div>
+{% endblock %}
