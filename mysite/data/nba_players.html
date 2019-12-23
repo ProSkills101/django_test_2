@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-3">
+  <h2>NBA players</h2>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>name</th>
+        <th>team</th>
+        <th>HT</th>
+        <th>WT</th>
+        <th>BORN</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for player in players %}
+      <tr>
+        <td>{{ player.name }}</td>
+        <td>{{ player.team }}</td>
+        <td>{{ player.ht }}</td>
+        <td>{{ player.wt }}</td>
+        <td>{{ player.born }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

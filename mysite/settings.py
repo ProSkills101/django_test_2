@@ -34,8 +34,15 @@ INSTALLED_APPS = [
     'main.apps.MainConfig',
     'polls.apps.PollsConfig',
     'blogs.apps.BlogsConfig',
+<<<<<<< HEAD
+    'accounts.apps.AccountsConfig',
+    'data.apps.DataConfig',
+    'blogs.apps.BlogsConfig',
+    'files.apps.FilesConfig',
+=======
     'files.apps.FilesConfig',
     'forums.apps.ForumsConfig',
+>>>>>>> fe38a1b5eddb57f47e4a4cae13612250fa849021
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

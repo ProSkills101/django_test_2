@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block js_bottom %}
+<script src="{% static 'polls/js/mypolls.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+  <div class="d-flex align-items-center my-2">
+    <h2>My Polls</h2>
+    <div class="ml-auto">
+      <a href="{% url 'polls:mypolls-create' %}" class="btn btn-primary">Create</a>
+    </div>
+  </div>
+
+  {% if questions %}
+  <div class="row text-light no-gutters bg-secondary">
+    <div class="col">
+      <h5 class="ml-2 my-1">Title</h5>
+    </div>
+    <div class="col">
+      <h5 class="ml-2 my-1">Pub Date</h5>
+    </div>
+    <div class="col">
+      <h5 class="ml-2 my-1">Host</h5>
+    </div>
+    <div class="col">
+      <h5 class="ml-2 my-1">Actions</h5>
+    </div>
+    <div class="col">
+      <h5 class="ml-2 my-1">State</h5>
+    </div>
+    <div class="col-1">
+      <h5 class="ml-2 my-1">Edit</h5>
+    </div>
+  </div>
+  {% for question in questions %}
+  <div class="row no-gutters border-bottom">
+    <div class="col p-1">
+      <a href="{% url 'polls:result' question.id %}">{{ question.question_text }}</a>
+    </div>
+    <div class="col p-1">
+      {{ question.created }}
+    </div>
+    <div class="col p-1">
+      <img class="rounded-circle" src="/static/media/{{ question.user.avatar }}" style="width: 30px; height: 30px;" />
+      {{ question.user.nickname }}
+    </div>
+    <div class="col p-1">
+      {% if user.is_authenticated %}
+      <a href="{% url 'polls:detail' question.id %}" class="btn btn-primary btn-sm">Vote</a>
+      {% endif %}
+      <a href="{% url 'polls:result' question.id %}" class="btn btn-success btn-sm">Result</a>
+    </div>
+    <div class="col p-1">
+      {{ question.state }}
+    </div>
+    <div class="col-2 p-1 text-right">
+      {% csrf_token %}
+      <button data-qid="{{question.id}}" class="btn btn-info btn-sm delete-btn">Delete</button>
+      <a href="{% url 'polls:mypolls-update' question_id=question.id %}" class="btn btn-danger btn-sm">Edit</a>
+    </div>
+  </div>
+  {% endfor %}
+  {% else %}
+    <p>No polls are available.</p>
+  {% endif %}
+</div>
+{% endblock %}
