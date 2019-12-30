@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block js %}
+<script src="{% static 'js/ckeditor4/ckeditor/ckeditor.js' %}"></script>
+<script src="{% static 'blogs/js/myblogs-create.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+<div class="container mt-2">
+  <div class="row">
+    <div class="col-md-8">
+      <h2>Create Blog</h2>
+      {% include 'blogs/blog-form.html' %}
+    </div>
+    <div class="col-md-4">
+      {% for file in files %}
+      <img src="/static/media/{{file.file}}" class="img-fluid" alt="{{file.name}}">
+      {% endfor %}
+    </div>
+  </div>
+</div>
+{% endblock %}

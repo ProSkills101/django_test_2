@@ -34,6 +34,8 @@ INSTALLED_APPS = [
     'main.apps.MainConfig',
     'polls.apps.PollsConfig',
     'blogs.apps.BlogsConfig',
+    'accounts.apps.AccountsConfig',
+    'data.apps.DataConfig',
     'files.apps.FilesConfig',
     'forums.apps.ForumsConfig',
     'django.contrib.admin',
@@ -42,7 +44,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'accounts.apps.AccountsConfig', # new
 ]
 
 MIDDLEWARE = [
