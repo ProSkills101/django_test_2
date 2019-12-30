@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block js %}
+<script src="{% static 'data/js/admin_nba_players.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+<div class="container mt-3">
+  <div class="d-flex">
+    <h2>Admin NBA players</h2>
+    <div class="ml-auto">
+      <a href="" class="btn btn-primary"  data-toggle="modal" data-target="#createPlayer">Create</a>
+    </div>
+  </div>
+  <div class="modal fade" id="createPlayer" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Update Player</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="form-group">
+              <label for="player_id">stats player id</label>
+              <input type="text" class="form-control" id="player_id" name="stats_player_id">
+            </div>
+            {% csrf_token %}
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" id="btnUpdate" class="btn btn-primary">Update</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <table class="table">
+    <thead>
+      <tr>
+        <th>name</th>
+        <th>team</th>
+        <th>HT</th>
+        <th>WT</th>
+        <th>BORN</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for player in players %}
+      <tr>
+        <td>{{ player.name }}</td>
+        <td>{{ player.team }}</td>
+        <td>{{ player.ht }}</td>
+        <td>{{ player.wt }}</td>
+        <td>{{ player.born }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

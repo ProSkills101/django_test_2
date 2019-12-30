@@ -20,9 +20,19 @@ from django.urls import include, path
 urlpatterns = [
     path('', include('main.urls')),
     path('polls/', include('polls.urls')),
+<<<<<<< HEAD
     #path('admin/', admin.site.urls),
     path('files/', include('files.urls')),
     path('blogs/', include('blogs.urls')),
     path('accounts/', include('accounts.urls')),
     path('accounts/', include('django.contrib.auth.urls')), 
+    path('data/', include('data.urls')),
+=======
+    path('admin/', admin.site.urls),
+    path('files/', include('files.urls')),
+    path('forums/', include('forums.urls')),
+    path('accounts/', include('accounts.urls')), # new
+    path('accounts/', include('django.contrib.auth.urls')), 
+    path('blogs/', include('blogs.urls')),
+>>>>>>> fe38a1b5eddb57f47e4a4cae13612250fa849021
 ]
