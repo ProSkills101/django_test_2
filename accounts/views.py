@@ -1,13 +1,25 @@
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth import  get_user_model
 from django.urls import reverse_lazy
 from django.views import generic
-from .models import User
+from django import forms
+#from .models import User
+
+User = get_user_model()
+
+class SignUpForm(UserCreationForm):
+    email = forms.EmailField(max_length=254, help_text='Required. Inform a valid email address.')
+
+    class Meta:
+        model = User
+        fields = ('username', 'email', 'password1', 'password2', )
+
 class SignUp(generic.CreateView):
-    form_class = UserCreationForm
+    form_class = SignUpForm
     success_url = reverse_lazy('login')
-    template_name = 'signup.html'
+    template_name = 'registration/signup.html'
 
 def profile(request, username):
     user = User.objects.get(username=username)

@@ -33,16 +33,10 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'main.apps.MainConfig',
     'polls.apps.PollsConfig',
-    'blogs.apps.BlogsConfig',
-<<<<<<< HEAD
-    'accounts.apps.AccountsConfig',
     'data.apps.DataConfig',
     'blogs.apps.BlogsConfig',
     'files.apps.FilesConfig',
-=======
-    'files.apps.FilesConfig',
     'forums.apps.ForumsConfig',
->>>>>>> fe38a1b5eddb57f47e4a4cae13612250fa849021
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -137,7 +131,7 @@ STATICFILES_DIRS = [
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
 
-AUTH_USER_MODEL = 'auth.User'
+AUTH_USER_MODEL = 'accounts.User'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'static', 'media')
