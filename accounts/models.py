@@ -1,4 +1,6 @@
 from django.db import models
+
+# Create your models here.
 from django.contrib.auth.models import AbstractUser
 from django.core.exceptions import ValidationError
 
@@ -14,7 +16,3 @@ class User(AbstractUser):
   nickname = models.CharField(max_length=50, blank=True)
   avatar = models.FileField(upload_to=filePath, validators=[file_size], blank=True)
   text = models.TextField(max_length=500, blank=True)
-# Create your models here.
-
-
-

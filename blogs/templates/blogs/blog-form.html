@@ -1,23 +1,23 @@
 <form data-blogid="{{blog.id}}">
-    <div class="form-group">
-      <label for="title">Title</label>
-      <input type="text" class="form-control" id="title" name="title" placeholder="Enter title" value="{{blog.title}}">
-      <div class="invalid-feedback">
-        Title is required.
-      </div>
+  <div class="form-group">
+    <label for="title">Title</label>
+    <input type="text" class="form-control" id="title" name="title" placeholder="Enter title" value="{{blog.title}}">
+    <div class="invalid-feedback">
+      Title is required.
     </div>
-    <div class="form-group">
-      <label for="cover">Cover</label>
-      <input type="text" class="form-control" id="cover" name="cover" placeholder="Enter cover" value="{{blog.cover}}">
+  </div>
+  <div class="form-group">
+    <label for="cover">Cover</label>
+    <input type="text" class="form-control" id="cover" name="cover" placeholder="Enter cover" value="{{blog.cover}}">
+  </div>
+  <div class="form-group">
+    <label for="html">Html</label>
+    <textarea class="form-control" id="html" rows="10">{{blog.html}}</textarea>
+    <div class="invalid-feedback">
+      Html is required.
     </div>
-    <div class="form-group">
-      <label for="html">Html</label>
-      <textarea class="form-control" id="html" rows="10">{{blog.html}}</textarea>
-      <div class="invalid-feedback">
-        Html is required.
-      </div>
-    </div>
-    
-    {% csrf_token %}
-    <button id="btnSubmit" type="submit" class="btn btn-primary">Submit</button>
-  </form>
+  </div>
+  
+  {% csrf_token %}
+  <button id="btnSubmit" type="submit" class="btn btn-primary">Submit</button>
+</form>
